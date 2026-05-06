@@ -1,3 +1,4 @@
+// Classe Livro representa um livro com código, título, autor e disponibilidade
 class Livro {
     public codigo: number;
     public titulo: string;
@@ -12,12 +13,10 @@ class Livro {
     }
 }
 
-
-
-
+// Classe Biblioteca gerencia um acervo de livros e operações de empréstimo
 class Biblioteca {
     public acervo: Livro[] = [];
-    
+    // Método para adicionar um livro ao acervo, verificando se já existe
     public adicionarLivro(livro: Livro): void {
         const existe: Livro | undefined = this.acervo.find((l: Livro) => l.codigo === livro.codigo);
         if (existe) {
@@ -26,7 +25,7 @@ class Biblioteca {
         this.acervo.push(livro);
         console.log(`Livro "${livro.titulo}" adicionado ao acervo.`);
     }
-
+    // Método para registrar o empréstimo de um livro, verificando disponibilidade
     public registrarEmprestimo(codigo: number): void {
         const livro: Livro | undefined = this.acervo.find((l: Livro) => l.codigo === codigo);
         if (!livro) {
@@ -38,7 +37,7 @@ class Biblioteca {
         livro.disponivel = false;
         console.log(`Livro "${livro.titulo}" emprestado com sucesso.`);
     }
-
+    // Método para consultar a disponibilidade de um livro, lançando erro se não encontrado
     public consultarDisponibilidade(codigo: number): boolean {
         const livro: Livro | undefined = this.acervo.find((l: Livro) => l.codigo === codigo);
         if (!livro) {
@@ -47,7 +46,7 @@ class Biblioteca {
         return livro.disponivel;
     }
 }
-
+// Função para cadastrar livros na biblioteca, criando instâncias de Livro e adicionando ao acervo
 function cadastrarLivros(biblioteca: Biblioteca): void {
   console.log("\n--- Cadastrando Livros ---");
  
@@ -63,7 +62,7 @@ function cadastrarLivros(biblioteca: Biblioteca): void {
   }
 }
 
-
+// Função para realizar empréstimo de um livro, tratando erros caso o livro não exista ou não esteja disponível
 function realizarEmprestimo(biblioteca: Biblioteca, codigo: number): void {
   console.log("\n--- Registrando Empréstimo ---");
  
@@ -76,7 +75,7 @@ function realizarEmprestimo(biblioteca: Biblioteca, codigo: number): void {
   }
 }
 
-
+// Função para verificar a disponibilidade de um livro, tratando erros caso o livro não exista
 function verificarDisponibilidade(biblioteca: Biblioteca, codigo: number): void {
   console.log("\n--- Consultando Disponibilidade ---");
  
@@ -91,7 +90,7 @@ function verificarDisponibilidade(biblioteca: Biblioteca, codigo: number): void 
   }
 }
 
-
+// Criando instância da biblioteca e executando as operações de cadastro, empréstimo e consulta
 const minhaBiblioteca: Biblioteca = new Biblioteca();
  
 // 1. Cadastrar livros
